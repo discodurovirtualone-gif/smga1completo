@@ -10,7 +10,7 @@ import RegistrosProductivos from "./pages/RegistrosProductivos.tsx";
 import RegistrosOtros from "./pages/RegistrosOtros.tsx";
 import ReporteVacas from "./pages/ReporteVacas.tsx";
 import ReporteToros from "./pages/ReporteToros.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
+
 
 const queryClient = new QueryClient();
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Milk, ClipboardList, BarChart3, FileText, LayoutDashboard } from "lucide-react";
+import { Milk, ClipboardList, BarChart3, FileText } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const CowIcon = ({ className }: { className?: string }) => (
