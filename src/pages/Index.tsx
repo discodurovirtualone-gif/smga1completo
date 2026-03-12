@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Baby, Milk, ClipboardList } from "lucide-react";
+import { Milk, ClipboardList, Beef } from "lucide-react";
 
 const menuItems = [
   {
     title: "Registros Reproductivos",
     description: "Parto, servicios, concepción, toro usado y más",
-    icon: Baby,
+    icon: Beef,
     path: "/reproductivos",
     color: "from-primary to-primary/80",
   },

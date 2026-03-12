@@ -13,8 +13,8 @@ const FormLayout = ({ title, children }: FormLayoutProps) => {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link to="/">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <ArrowLeft className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="rounded-full h-12 w-12">
+              <ArrowLeft className="h-8 w-8" />
             </Button>
           </Link>
           <h1 className="text-3xl font-bold text-foreground">{title}</h1>
