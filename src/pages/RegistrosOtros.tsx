@@ -1,8 +1,14 @@
 import { useState } from "react";
 import FormLayout from "@/components/FormLayout";
 import FieldInput from "@/components/FieldInput";
+import FieldSelect from "@/components/FieldSelect";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+
+const ejercicioOptions = Array.from({ length: 10 }, (_, i) => {
+  const y = 2020 + i;
+  return { value: `${y}/${y + 1}`, label: `${y}/${y + 1}` };
+});
 
 const initialState = {
   ejercicio: "",
@@ -30,7 +36,7 @@ const RegistrosOtros = () => {
     <FormLayout title="Registros Otros">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <FieldInput label="Ejercicio" value={form.ejercicio} onChange={update("ejercicio")} />
+          <FieldSelect label="Ejercicio" value={form.ejercicio} onChange={update("ejercicio")} options={ejercicioOptions} placeholder="Seleccionar año" />
           <FieldInput label="#Id Vaca" value={form.idVaca} onChange={update("idVaca")} />
         </div>
 

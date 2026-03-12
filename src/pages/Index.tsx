@@ -5,7 +5,7 @@ const menuItems = [
   {
     title: "Registros Reproductivos",
     description: "Parto, servicios, concepción, toro usado y más",
-    icon: Baby,
+    icon: Beef,
     path: "/reproductivos",
     color: "from-primary to-primary/80",
   },
