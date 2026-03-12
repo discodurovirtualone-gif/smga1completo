@@ -46,6 +46,10 @@
     --sidebar-ring: 142 50% 28%;
 
     --field-highlight: 45 100% 70%;
+
+    --report: 210 60% 45%;
+    --report-foreground: 0 0% 100%;
+    --report-accent: 195 70% 40%;
   }
 }
 

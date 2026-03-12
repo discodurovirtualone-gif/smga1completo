@@ -50,6 +50,11 @@ export default {
         field: {
           highlight: "hsl(var(--field-highlight))",
         },
+        report: {
+          DEFAULT: "hsl(var(--report))",
+          foreground: "hsl(var(--report-foreground))",
+          accent: "hsl(var(--report-accent))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
