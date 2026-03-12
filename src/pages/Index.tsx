@@ -78,7 +78,7 @@ const reportesItems = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-background">
+    <div className="min-h-screen flex flex-col items-center p-6 py-12 bg-background">
       <div className="text-center mb-10">
         <h1 className="text-5xl font-extrabold tracking-tight text-foreground mb-3">
           🐄 Sistema Ganadero
