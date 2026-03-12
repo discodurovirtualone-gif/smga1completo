@@ -10,7 +10,7 @@ import RegistrosProductivos from "./pages/RegistrosProductivos.tsx";
 import RegistrosOtros from "./pages/RegistrosOtros.tsx";
 import ReporteVacas from "./pages/ReporteVacas.tsx";
 import ReporteToros from "./pages/ReporteToros.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
+
 
 const queryClient = new QueryClient();
 
@@ -27,7 +27,7 @@ const App = () => (
           <Route path="/otros" element={<RegistrosOtros />} />
           <Route path="/reporte-vacas" element={<ReporteVacas />} />
           <Route path="/reporte-toros" element={<ReporteToros />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

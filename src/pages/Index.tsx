@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Milk, ClipboardList, BarChart3, FileText, LayoutDashboard } from "lucide-react";
+import { Milk, ClipboardList, BarChart3, FileText } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const CowIcon = ({ className }: { className?: string }) => (
@@ -64,15 +64,6 @@ const reportesItems = [
     color: "from-report to-report-accent",
     iconBg: "bg-report/10 ring-2 ring-report/30",
     iconColor: "text-report",
-  },
-  {
-    title: "Tablero General",
-    description: "Dashboard con indicadores del rodeo",
-    icon: LayoutDashboard,
-    path: "/dashboard",
-    color: "from-report-accent to-report",
-    iconBg: "bg-report-accent/10 ring-2 ring-report-accent/30",
-    iconColor: "text-report-accent",
   },
 ];
 
