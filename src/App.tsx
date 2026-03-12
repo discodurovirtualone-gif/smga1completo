@@ -8,9 +8,6 @@ import NotFound from "./pages/NotFound.tsx";
 import RegistrosReproductivos from "./pages/RegistrosReproductivos.tsx";
 import RegistrosProductivos from "./pages/RegistrosProductivos.tsx";
 import RegistrosOtros from "./pages/RegistrosOtros.tsx";
-import ReporteVacas from "./pages/ReporteVacas.tsx";
-import ReporteToros from "./pages/ReporteToros.tsx";
-
 
 const queryClient = new QueryClient();
 
@@ -25,9 +22,6 @@ const App = () => (
           <Route path="/reproductivos" element={<RegistrosReproductivos />} />
           <Route path="/productivos" element={<RegistrosProductivos />} />
           <Route path="/otros" element={<RegistrosOtros />} />
-          <Route path="/reporte-vacas" element={<ReporteVacas />} />
-          <Route path="/reporte-toros" element={<ReporteToros />} />
-          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
