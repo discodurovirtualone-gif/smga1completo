@@ -65,15 +65,6 @@ const reportesItems = [
     iconBg: "bg-report/10 ring-2 ring-report/30",
     iconColor: "text-report",
   },
-  {
-    title: "Tablero General",
-    description: "Dashboard con indicadores del rodeo",
-    icon: LayoutDashboard,
-    path: "/dashboard",
-    color: "from-report-accent to-report",
-    iconBg: "bg-report-accent/10 ring-2 ring-report-accent/30",
-    iconColor: "text-report-accent",
-  },
 ];
 
 const Index = () => {
