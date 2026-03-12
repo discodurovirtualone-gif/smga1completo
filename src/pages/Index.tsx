@@ -6,7 +6,7 @@ const registroItems = [
   {
     title: "Registros Reproductivos",
     description: "Parto, servicios, concepción, toro usado y más",
-    icon: Beef,
+    icon: NotebookPen,
     path: "/reproductivos",
     color: "from-primary to-primary/80",
   },
