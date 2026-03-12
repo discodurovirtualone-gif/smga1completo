@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { Milk, ClipboardList, Beef, FileBarChart, BarChart3, LayoutDashboard } from "lucide-react";
+import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const registroItems = [
   {
     title: "Registros Reproductivos",
     description: "Parto, servicios, concepción, toro usado y más",
-    icon: Beef,
+    icon: NotebookPen,
     path: "/reproductivos",
     color: "from-primary to-primary/80",
   },
@@ -61,7 +61,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-background">
       <div className="text-center mb-12">
         <h1 className="text-5xl font-extrabold tracking-tight text-foreground mb-3">
-          🐄 Sistema Ganadero
+          🐄 Sistema de Mejora Genetica
         </h1>
         <p className="text-lg text-muted-foreground">
           Seleccione el módulo de registro
