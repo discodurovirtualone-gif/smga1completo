@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Baby, Milk, ClipboardList } from "lucide-react";
+import { Milk, ClipboardList, Beef } from "lucide-react";
 
 const menuItems = [
   {
