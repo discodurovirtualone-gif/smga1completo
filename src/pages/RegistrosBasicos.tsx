@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { Plus, Pencil } from "lucide-react";
+import { useGanaderia, RegistroBasico } from "@/context/GanaderiaContext";
 
 const ejercicioOptions = Array.from({ length: 10 }, (_, i) => {
   const y = 2020 + i;
@@ -18,73 +19,42 @@ const partosOptions = [
   { value: "Multípara", label: "Multípara" },
 ];
 
-interface Registro {
-  ejercicio: string;
-  id_vaca: string;
-  partos: string;
-  fecha_nacimiento: string;
-  raza: string;
-  lactancia: string;
-  edad: string;
-}
-
-const emptyRegistro: Registro = {
-  ejercicio: "",
-  id_vaca: "",
-  partos: "",
-  fecha_nacimiento: "",
-  raza: "",
-  lactancia: "",
-  edad: "",
+const emptyRegistro: RegistroBasico = {
+  ejercicio: "", id_vaca: "", partos: "", fecha_nacimiento: "",
+  raza: "", lactancia: "", edad: "", potencial_vaca: "",
 };
 
 const RegistrosBasicos = () => {
-  const [registros, setRegistros] = useState<Registro[]>([]);
-  const [form, setForm] = useState<Registro>(emptyRegistro);
+  const { registrosBasicos, setRegistrosBasicos } = useGanaderia();
+  const [form, setForm] = useState<RegistroBasico>(emptyRegistro);
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
 
-  const update = (key: keyof Registro) => (value: string) =>
+  const update = (key: keyof RegistroBasico) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.id_vaca) {
-      toast.error("El campo Id Vaca es obligatorio");
-      return;
-    }
+    if (!form.id_vaca) { toast.error("El campo Id Vaca es obligatorio"); return; }
     if (editIndex !== null) {
-      setRegistros((prev) => prev.map((r, i) => (i === editIndex ? form : r)));
+      setRegistrosBasicos((prev) => prev.map((r, i) => (i === editIndex ? form : r)));
       toast.success("Registro actualizado");
     } else {
-      setRegistros((prev) => [...prev, form]);
+      setRegistrosBasicos((prev) => [...prev, form]);
       toast.success("Registro agregado");
     }
-    setForm(emptyRegistro);
-    setEditIndex(null);
-    setOpen(false);
+    setForm(emptyRegistro); setEditIndex(null); setOpen(false);
   };
 
-  const startEdit = (index: number) => {
-    setForm(registros[index]);
-    setEditIndex(index);
-    setOpen(true);
-  };
-
-  const startNew = () => {
-    setForm(emptyRegistro);
-    setEditIndex(null);
-    setOpen(true);
-  };
+  const startEdit = (i: number) => { setForm(registrosBasicos[i]); setEditIndex(i); setOpen(true); };
+  const startNew = () => { setForm(emptyRegistro); setEditIndex(null); setOpen(true); };
 
   return (
     <FormLayout title="Registros Básicos">
       <div className="flex justify-end mb-4">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button onClick={startNew}>
-              <Plus className="h-4 w-4 mr-2" /> Agregar Registro
-            </Button>
+            <Button onClick={startNew}><Plus className="h-4 w-4 mr-2" /> Agregar Registro</Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
@@ -99,6 +69,7 @@ const RegistrosBasicos = () => {
                 <FieldInput label="Raza (código)" value={form.raza} onChange={update("raza")} type="number" />
                 <FieldInput label="Lactancia" value={form.lactancia} onChange={update("lactancia")} type="number" />
                 <FieldInput label="Edad (años)" value={form.edad} onChange={update("edad")} type="number" />
+                <FieldInput label="Potencial Vaca (lt)" value={form.potencial_vaca} onChange={update("potencial_vaca")} type="number" highlighted />
               </div>
               <div className="flex justify-end gap-2">
                 <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
@@ -115,37 +86,37 @@ const RegistrosBasicos = () => {
             <TableRow className="bg-muted/50">
               <TableHead>Id Vaca</TableHead>
               <TableHead>Partos</TableHead>
-              <TableHead>Fecha Nacimiento</TableHead>
+              <TableHead>Fecha Nac.</TableHead>
               <TableHead>Raza</TableHead>
               <TableHead>Lactancia</TableHead>
               <TableHead>Edad</TableHead>
+              <TableHead>Potencial</TableHead>
               <TableHead className="w-16">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {registros.length === 0 ? (
+            {registrosBasicos.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
                   No hay registros. Haga clic en "Agregar Registro" para comenzar.
                 </TableCell>
               </TableRow>
-            ) : (
-              registros.map((r, i) => (
-                <TableRow key={i}>
-                  <TableCell className="font-medium">{r.id_vaca}</TableCell>
-                  <TableCell>{r.partos}</TableCell>
-                  <TableCell>{r.fecha_nacimiento}</TableCell>
-                  <TableCell>{r.raza}</TableCell>
-                  <TableCell>{r.lactancia}</TableCell>
-                  <TableCell>{r.edad}</TableCell>
-                  <TableCell>
-                    <Button variant="ghost" size="icon" onClick={() => startEdit(i)}>
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
+            ) : registrosBasicos.map((r, i) => (
+              <TableRow key={i}>
+                <TableCell className="font-medium">{r.id_vaca}</TableCell>
+                <TableCell>{r.partos}</TableCell>
+                <TableCell>{r.fecha_nacimiento}</TableCell>
+                <TableCell>{r.raza}</TableCell>
+                <TableCell>{r.lactancia}</TableCell>
+                <TableCell>{r.edad}</TableCell>
+                <TableCell>{r.potencial_vaca}</TableCell>
+                <TableCell>
+                  <Button variant="ghost" size="icon" onClick={() => startEdit(i)}>
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

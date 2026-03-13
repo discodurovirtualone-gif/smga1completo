@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard, BookOpen } from "lucide-react";
+import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard, BookOpen, Calculator, SlidersHorizontal } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const registroItems = [
@@ -30,6 +30,20 @@ const registroItems = [
     icon: ClipboardList,
     path: "/otros",
     color: "from-primary/70 to-primary",
+  },
+  {
+    title: "Factores de Corrección",
+    description: "Tabla de factores por raza, edad y lactancia",
+    icon: SlidersHorizontal,
+    path: "/factores",
+    color: "from-accent/80 to-primary/60",
+  },
+  {
+    title: "Cálculo Wood 305",
+    description: "Producción estimada con fórmula de Wood",
+    icon: Calculator,
+    path: "/produccion-wood",
+    color: "from-primary/60 to-accent",
   },
 ];
 

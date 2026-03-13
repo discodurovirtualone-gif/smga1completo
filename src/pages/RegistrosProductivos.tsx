@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import FormLayout from "@/components/FormLayout";
 import FieldInput from "@/components/FieldInput";
 import FieldSelect from "@/components/FieldSelect";
@@ -8,30 +8,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Plus, Pencil, ArrowUpDown } from "lucide-react";
+import { useGanaderia, RegistroProductivo } from "@/context/GanaderiaContext";
 
 const ejercicioOptions = Array.from({ length: 10 }, (_, i) => {
   const y = 2020 + i;
   return { value: `${y % 100}/${(y + 1) % 100}`, label: `${y % 100}/${(y + 1) % 100}` };
 });
 
-interface Registro {
-  ejercicio: string;
-  id_vaca: string;
-  reg_1_dia30: string;
-  reg_2_dia120: string;
-  reg_3_dia210: string;
-  reg_4_dia270: string;
-  lc305_wood: string;
-  porcentaje_grasa: string;
-  porcentaje_proteina: string;
-  lact1: string;
-  lact2: string;
-  lact3: string;
-  lact4: string;
-  lact5: string;
-}
-
-const emptyRegistro: Registro = {
+const emptyRegistro: RegistroProductivo = {
   ejercicio: "", id_vaca: "",
   reg_1_dia30: "", reg_2_dia120: "", reg_3_dia210: "", reg_4_dia270: "",
   lc305_wood: "", porcentaje_grasa: "", porcentaje_proteina: "",
@@ -48,56 +32,39 @@ const calcKg = (lc305: string, pct: string) => {
 type SortKey = "id_vaca" | "lc305_wood" | "porcentaje_grasa" | "porcentaje_proteina" | "lact1" | "lact2" | "lact3" | "lact4" | "lact5";
 
 const RegistrosProductivos = () => {
-  const [registros, setRegistros] = useState<Registro[]>([]);
-  const [form, setForm] = useState<Registro>(emptyRegistro);
+  const { registrosProductivos, setRegistrosProductivos } = useGanaderia();
+  const [form, setForm] = useState<RegistroProductivo>(emptyRegistro);
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [filterText, setFilterText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortAsc, setSortAsc] = useState(true);
 
-  const update = (key: keyof Registro) => (value: string) =>
+  const update = (key: keyof RegistroProductivo) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.id_vaca) {
-      toast.error("El campo Id Vaca es obligatorio");
-      return;
-    }
+    if (!form.id_vaca) { toast.error("El campo Id Vaca es obligatorio"); return; }
     if (editIndex !== null) {
-      setRegistros((prev) => prev.map((r, i) => (i === editIndex ? form : r)));
+      setRegistrosProductivos((prev) => prev.map((r, i) => (i === editIndex ? form : r)));
       toast.success("Registro actualizado");
     } else {
-      setRegistros((prev) => [...prev, form]);
+      setRegistrosProductivos((prev) => [...prev, form]);
       toast.success("Registro agregado");
     }
-    setForm(emptyRegistro);
-    setEditIndex(null);
-    setOpen(false);
+    setForm(emptyRegistro); setEditIndex(null); setOpen(false);
   };
 
-  const startEdit = (index: number) => {
-    setForm(registros[index]);
-    setEditIndex(index);
-    setOpen(true);
-  };
-
-  const startNew = () => {
-    setForm(emptyRegistro);
-    setEditIndex(null);
-    setOpen(true);
-  };
+  const startEdit = (i: number) => { setForm(registrosProductivos[i]); setEditIndex(i); setOpen(true); };
+  const startNew = () => { setForm(emptyRegistro); setEditIndex(null); setOpen(true); };
 
   const toggleSort = (key: SortKey) => {
     if (sortKey === key) setSortAsc(!sortAsc);
     else { setSortKey(key); setSortAsc(true); }
   };
 
-  const filtered = registros.filter((r) =>
-    filterText === "" || r.id_vaca.includes(filterText)
-  );
-
+  const filtered = registrosProductivos.filter((r) => filterText === "" || r.id_vaca.includes(filterText));
   const sorted = sortKey
     ? [...filtered].sort((a, b) => {
         const va = parseFloat(a[sortKey]) || 0;
@@ -108,26 +75,17 @@ const RegistrosProductivos = () => {
 
   const SortHeader = ({ label, field }: { label: string; field: SortKey }) => (
     <TableHead className="cursor-pointer select-none" onClick={() => toggleSort(field)}>
-      <span className="inline-flex items-center gap-1">
-        {label} <ArrowUpDown className="h-3 w-3" />
-      </span>
+      <span className="inline-flex items-center gap-1">{label} <ArrowUpDown className="h-3 w-3" /></span>
     </TableHead>
   );
 
   return (
     <FormLayout title="Registros Productivos">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-        <Input
-          placeholder="Filtrar por Id Vaca..."
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-          className="max-w-xs"
-        />
+        <Input placeholder="Filtrar por Id Vaca..." value={filterText} onChange={(e) => setFilterText(e.target.value)} className="max-w-xs" />
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button onClick={startNew}>
-              <Plus className="h-4 w-4 mr-2" /> Agregar Registro
-            </Button>
+            <Button onClick={startNew}><Plus className="h-4 w-4 mr-2" /> Agregar Registro</Button>
           </DialogTrigger>
           <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
@@ -201,32 +159,30 @@ const RegistrosProductivos = () => {
                   No hay registros. Haga clic en "Agregar Registro" para comenzar.
                 </TableCell>
               </TableRow>
-            ) : (
-              sorted.map((r, i) => (
-                <TableRow key={i}>
-                  <TableCell className="font-medium">{r.id_vaca}</TableCell>
-                  <TableCell>{r.reg_1_dia30}</TableCell>
-                  <TableCell>{r.reg_2_dia120}</TableCell>
-                  <TableCell>{r.reg_3_dia210}</TableCell>
-                  <TableCell>{r.reg_4_dia270}</TableCell>
-                  <TableCell>{r.lc305_wood}</TableCell>
-                  <TableCell>{r.porcentaje_grasa}</TableCell>
-                  <TableCell>{r.porcentaje_proteina}</TableCell>
-                  <TableCell>{calcKg(r.lc305_wood, r.porcentaje_grasa)}</TableCell>
-                  <TableCell>{calcKg(r.lc305_wood, r.porcentaje_proteina)}</TableCell>
-                  <TableCell>{r.lact1}</TableCell>
-                  <TableCell>{r.lact2}</TableCell>
-                  <TableCell>{r.lact3}</TableCell>
-                  <TableCell>{r.lact4}</TableCell>
-                  <TableCell>{r.lact5}</TableCell>
-                  <TableCell>
-                    <Button variant="ghost" size="icon" onClick={() => startEdit(i)}>
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
+            ) : sorted.map((r, i) => (
+              <TableRow key={i}>
+                <TableCell className="font-medium">{r.id_vaca}</TableCell>
+                <TableCell>{r.reg_1_dia30}</TableCell>
+                <TableCell>{r.reg_2_dia120}</TableCell>
+                <TableCell>{r.reg_3_dia210}</TableCell>
+                <TableCell>{r.reg_4_dia270}</TableCell>
+                <TableCell>{r.lc305_wood}</TableCell>
+                <TableCell>{r.porcentaje_grasa}</TableCell>
+                <TableCell>{r.porcentaje_proteina}</TableCell>
+                <TableCell>{calcKg(r.lc305_wood, r.porcentaje_grasa)}</TableCell>
+                <TableCell>{calcKg(r.lc305_wood, r.porcentaje_proteina)}</TableCell>
+                <TableCell>{r.lact1}</TableCell>
+                <TableCell>{r.lact2}</TableCell>
+                <TableCell>{r.lact3}</TableCell>
+                <TableCell>{r.lact4}</TableCell>
+                <TableCell>{r.lact5}</TableCell>
+                <TableCell>
+                  <Button variant="ghost" size="icon" onClick={() => startEdit(i)}>
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
