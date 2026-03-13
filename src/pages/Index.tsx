@@ -4,6 +4,13 @@ import { Separator } from "@/components/ui/separator";
 
 const registroItems = [
   {
+    title: "Registros Básicos",
+    description: "Datos base de cada vaca: raza, parto, edad",
+    icon: BookOpen,
+    path: "/basicos",
+    color: "from-accent to-accent/80",
+  },
+  {
     title: "Registros Reproductivos",
     description: "Parto, servicios, concepción, toro usado y más",
     icon: NotebookPen,
