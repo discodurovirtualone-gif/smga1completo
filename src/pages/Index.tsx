@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
-import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard } from "lucide-react";
+import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard, BookOpen } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const registroItems = [
+  {
+    title: "Registros Básicos",
+    description: "Datos base de cada vaca: raza, parto, edad",
+    icon: BookOpen,
+    path: "/basicos",
+    color: "from-accent to-accent/80",
+  },
   {
     title: "Registros Reproductivos",
     description: "Parto, servicios, concepción, toro usado y más",

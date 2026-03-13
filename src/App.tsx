@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import RegistrosBasicos from "./pages/RegistrosBasicos.tsx";
 import RegistrosReproductivos from "./pages/RegistrosReproductivos.tsx";
 import RegistrosProductivos from "./pages/RegistrosProductivos.tsx";
 import RegistrosOtros from "./pages/RegistrosOtros.tsx";
@@ -22,6 +23,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/basicos" element={<RegistrosBasicos />} />
           <Route path="/reproductivos" element={<RegistrosReproductivos />} />
           <Route path="/productivos" element={<RegistrosProductivos />} />
           <Route path="/otros" element={<RegistrosOtros />} />
