@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard } from "lucide-react";
+import { Milk, ClipboardList, NotebookPen, FileBarChart, BarChart3, LayoutDashboard, BookOpen } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const registroItems = [
