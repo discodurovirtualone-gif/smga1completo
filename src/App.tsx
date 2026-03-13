@@ -15,6 +15,8 @@ import ReporteToros from "./pages/ReporteToros.tsx";
 import TableroFinal from "./pages/TableroFinal.tsx";
 import FactoresCorreccion from "./pages/FactoresCorreccion.tsx";
 import ProduccionWood from "./pages/ProduccionWood.tsx";
+import IndicadoresReproductivos from "./pages/IndicadoresReproductivos.tsx";
+import ValorCria from "./pages/ValorCria.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,8 @@ const App = () => (
             <Route path="/produccion-wood" element={<ProduccionWood />} />
             <Route path="/reporte-vacas" element={<ReporteVacas />} />
             <Route path="/reporte-toros" element={<ReporteToros />} />
+            <Route path="/indicadores-reproductivos" element={<IndicadoresReproductivos />} />
+            <Route path="/valor-cria" element={<ValorCria />} />
             <Route path="/tablero-final" element={<TableroFinal />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
