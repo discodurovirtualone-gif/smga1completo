@@ -45,6 +45,20 @@ const registroItems = [
     path: "/produccion-wood",
     color: "from-primary/60 to-accent",
   },
+  {
+    title: "Indicadores Reproductivos",
+    description: "IIP, IPC, servicios/concepción y ranking",
+    icon: Heart,
+    path: "/indicadores-reproductivos",
+    color: "from-accent to-primary/70",
+  },
+  {
+    title: "Valor de Cría",
+    description: "Cálculo genético BV y valor hijas",
+    icon: Dna,
+    path: "/valor-cria",
+    color: "from-primary/80 to-accent/60",
+  },
 ];
 
 const reporteItems = [
