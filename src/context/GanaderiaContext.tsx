@@ -1,5 +1,33 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
+export interface RegistroReproductivo {
+  id_vaca: string;
+  ejercicio: string;
+  parto: string;
+  raza: string;
+  servicio1: string;
+  servicio2: string;
+  servicio3: string;
+  concepcion1: string;
+  toroUsado: string;
+  aborto1: string;
+  aborto2: string;
+  parto1: string;
+  iip: string;
+  ipc: string;
+  serv_conc: string;
+}
+
+export interface RegistroOtro {
+  id_vaca: string;
+  ejercicio: string;
+  renguera: string;
+  mastitis: string;
+  facParto: string;
+  longevidad: string;
+  fortalezaPatas: string;
+}
+
 export interface RegistroBasico {
   ejercicio: string;
   id_vaca: string;
@@ -104,6 +132,10 @@ interface GanaderiaContextType {
   setRegistrosProductivos: React.Dispatch<React.SetStateAction<RegistroProductivo[]>>;
   factores: FactorCorreccion[];
   setFactores: React.Dispatch<React.SetStateAction<FactorCorreccion[]>>;
+  registrosReproductivos: RegistroReproductivo[];
+  setRegistrosReproductivos: React.Dispatch<React.SetStateAction<RegistroReproductivo[]>>;
+  registrosOtros: RegistroOtro[];
+  setRegistrosOtros: React.Dispatch<React.SetStateAction<RegistroOtro[]>>;
 }
 
 const GanaderiaContext = createContext<GanaderiaContextType | undefined>(undefined);
@@ -112,12 +144,16 @@ export const GanaderiaProvider = ({ children }: { children: ReactNode }) => {
   const [registrosBasicos, setRegistrosBasicos] = useState<RegistroBasico[]>([]);
   const [registrosProductivos, setRegistrosProductivos] = useState<RegistroProductivo[]>([]);
   const [factores, setFactores] = useState<FactorCorreccion[]>(defaultFactores);
+  const [registrosReproductivos, setRegistrosReproductivos] = useState<RegistroReproductivo[]>([]);
+  const [registrosOtros, setRegistrosOtros] = useState<RegistroOtro[]>([]);
 
   return (
     <GanaderiaContext.Provider value={{
       registrosBasicos, setRegistrosBasicos,
       registrosProductivos, setRegistrosProductivos,
       factores, setFactores,
+      registrosReproductivos, setRegistrosReproductivos,
+      registrosOtros, setRegistrosOtros,
     }}>
       {children}
     </GanaderiaContext.Provider>

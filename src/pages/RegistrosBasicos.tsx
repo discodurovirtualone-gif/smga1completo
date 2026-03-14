@@ -19,6 +19,11 @@ const partosOptions = [
   { value: "Multípara", label: "Multípara" },
 ];
 
+const lactanciaOptions = Array.from({ length: 6 }, (_, i) => ({
+  value: String(i + 1),
+  label: String(i + 1),
+}));
+
 const emptyRegistro: RegistroBasico = {
   ejercicio: "", id_vaca: "", partos: "", fecha_nacimiento: "",
   raza: "", lactancia: "", edad: "", potencial_vaca: "",
@@ -67,7 +72,7 @@ const RegistrosBasicos = () => {
                 <FieldSelect label="Partos" value={form.partos} onChange={update("partos")} options={partosOptions} placeholder="Seleccionar" />
                 <FieldInput label="Fecha Nacimiento" value={form.fecha_nacimiento} onChange={update("fecha_nacimiento")} type="date" />
                 <FieldInput label="Raza (código)" value={form.raza} onChange={update("raza")} type="number" />
-                <FieldInput label="Lactancia" value={form.lactancia} onChange={update("lactancia")} type="number" />
+                <FieldSelect label="Lactancia" value={form.lactancia} onChange={update("lactancia")} options={lactanciaOptions} placeholder="Seleccionar" />
                 <FieldInput label="Edad (años)" value={form.edad} onChange={update("edad")} type="number" />
                 <FieldInput label="Potencial Vaca (lt)" value={form.potencial_vaca} onChange={update("potencial_vaca")} type="number" highlighted />
               </div>
@@ -84,6 +89,7 @@ const RegistrosBasicos = () => {
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
+              <TableHead>Ejercicio</TableHead>
               <TableHead>Id Vaca</TableHead>
               <TableHead>Partos</TableHead>
               <TableHead>Fecha Nac.</TableHead>
@@ -97,12 +103,13 @@ const RegistrosBasicos = () => {
           <TableBody>
             {registrosBasicos.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
                   No hay registros. Haga clic en "Agregar Registro" para comenzar.
                 </TableCell>
               </TableRow>
             ) : registrosBasicos.map((r, i) => (
               <TableRow key={i}>
+                <TableCell>{r.ejercicio}</TableCell>
                 <TableCell className="font-medium">{r.id_vaca}</TableCell>
                 <TableCell>{r.partos}</TableCell>
                 <TableCell>{r.fecha_nacimiento}</TableCell>
