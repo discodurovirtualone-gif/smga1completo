@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import type { RegistroReproductivo } from "@/pages/RegistrosReproductivos";
+import type { RegistroOtro } from "@/pages/RegistrosOtros";
 
 export interface RegistroBasico {
   ejercicio: string;
@@ -104,6 +106,10 @@ interface GanaderiaContextType {
   setRegistrosProductivos: React.Dispatch<React.SetStateAction<RegistroProductivo[]>>;
   factores: FactorCorreccion[];
   setFactores: React.Dispatch<React.SetStateAction<FactorCorreccion[]>>;
+  registrosReproductivos: RegistroReproductivo[];
+  setRegistrosReproductivos: React.Dispatch<React.SetStateAction<RegistroReproductivo[]>>;
+  registrosOtros: RegistroOtro[];
+  setRegistrosOtros: React.Dispatch<React.SetStateAction<RegistroOtro[]>>;
 }
 
 const GanaderiaContext = createContext<GanaderiaContextType | undefined>(undefined);
@@ -112,12 +118,16 @@ export const GanaderiaProvider = ({ children }: { children: ReactNode }) => {
   const [registrosBasicos, setRegistrosBasicos] = useState<RegistroBasico[]>([]);
   const [registrosProductivos, setRegistrosProductivos] = useState<RegistroProductivo[]>([]);
   const [factores, setFactores] = useState<FactorCorreccion[]>(defaultFactores);
+  const [registrosReproductivos, setRegistrosReproductivos] = useState<RegistroReproductivo[]>([]);
+  const [registrosOtros, setRegistrosOtros] = useState<RegistroOtro[]>([]);
 
   return (
     <GanaderiaContext.Provider value={{
       registrosBasicos, setRegistrosBasicos,
       registrosProductivos, setRegistrosProductivos,
       factores, setFactores,
+      registrosReproductivos, setRegistrosReproductivos,
+      registrosOtros, setRegistrosOtros,
     }}>
       {children}
     </GanaderiaContext.Provider>
