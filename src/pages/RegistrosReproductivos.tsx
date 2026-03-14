@@ -15,24 +15,6 @@ const razaOptions = [
   { value: "otra", label: "Otra" },
 ];
 
-export interface RegistroReproductivo {
-  id_vaca: string;
-  ejercicio: string;
-  parto: string;
-  raza: string;
-  servicio1: string;
-  servicio2: string;
-  servicio3: string;
-  concepcion1: string;
-  toroUsado: string;
-  aborto1: string;
-  aborto2: string;
-  parto1: string;
-  iip: string;
-  ipc: string;
-  serv_conc: string;
-}
-
 const emptyRepro = (id_vaca: string, ejercicio: string): RegistroReproductivo => ({
   id_vaca, ejercicio, parto: "", raza: "",
   servicio1: "", servicio2: "", servicio3: "",

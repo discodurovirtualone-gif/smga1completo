@@ -13,16 +13,6 @@ const scoreOptions = Array.from({ length: 5 }, (_, i) => ({
   label: String(i + 1),
 }));
 
-export interface RegistroOtro {
-  id_vaca: string;
-  ejercicio: string;
-  renguera: string;
-  mastitis: string;
-  facParto: string;
-  longevidad: string;
-  fortalezaPatas: string;
-}
-
 const emptyOtro = (id_vaca: string, ejercicio: string): RegistroOtro => ({
   id_vaca, ejercicio, renguera: "", mastitis: "", facParto: "", longevidad: "", fortalezaPatas: "",
 });
