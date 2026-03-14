@@ -1,6 +1,32 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import type { RegistroReproductivo } from "@/pages/RegistrosReproductivos";
-import type { RegistroOtro } from "@/pages/RegistrosOtros";
+
+export interface RegistroReproductivo {
+  id_vaca: string;
+  ejercicio: string;
+  parto: string;
+  raza: string;
+  servicio1: string;
+  servicio2: string;
+  servicio3: string;
+  concepcion1: string;
+  toroUsado: string;
+  aborto1: string;
+  aborto2: string;
+  parto1: string;
+  iip: string;
+  ipc: string;
+  serv_conc: string;
+}
+
+export interface RegistroOtro {
+  id_vaca: string;
+  ejercicio: string;
+  renguera: string;
+  mastitis: string;
+  facParto: string;
+  longevidad: string;
+  fortalezaPatas: string;
+}
 
 export interface RegistroBasico {
   ejercicio: string;
