@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { Pencil } from "lucide-react";
-import { useGanaderia } from "@/context/GanaderiaContext";
+import { useGanaderia, RegistroOtro } from "@/context/GanaderiaContext";
 
 const scoreOptions = Array.from({ length: 5 }, (_, i) => ({
   value: String(i + 1),
